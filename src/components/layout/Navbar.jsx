@@ -13,6 +13,10 @@ const pageTitles = {
   '/reports': 'Reports & Analytics',
   '/categories': 'Category Settings',
   '/profile': 'My Profile',
+  '/admin/dashboard': 'Admin Overview',
+  '/admin/users': 'User Management',
+  '/admin/reports': 'System Reports & Analytics',
+  '/admin/settings': 'System Settings & Audit Logs',
 };
 
 const Navbar = ({ onOpenMobile }) => {

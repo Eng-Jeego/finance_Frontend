@@ -73,12 +73,15 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  const isAdmin = user?.role?.toUpperCase() === 'ADMIN';
+
   return (
     <AuthContext.Provider
       value={{
         user,
         token,
         isAuthenticated: !!token && !!user,
+        isAdmin,
         loading,
         login,
         register,
