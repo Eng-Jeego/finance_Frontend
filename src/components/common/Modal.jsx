@@ -38,15 +38,15 @@ const Modal = ({
       {/* Modal Dialog */}
       <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
         <div
-          className={`relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all w-full ${maxWidth} my-8`}
+          className={`relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-transparent dark:border-slate-800 text-left shadow-2xl transition-all w-full ${maxWidth} my-8`}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
-            <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
+          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-6 py-4">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{title}</h3>
             <button
               onClick={onClose}
-              className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
+              className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
             >
               <X className="h-5 w-5" />
             </button>

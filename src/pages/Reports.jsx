@@ -81,8 +81,8 @@ const Reports = () => {
       {/* Header & Date Filters */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Financial Reports & Analytics</h2>
-          <p className="text-sm text-slate-500 mt-1">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Financial Reports & Analytics</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Deep dive into your spending trends, revenue sources, and historical performance.
           </p>
         </div>
@@ -126,53 +126,53 @@ const Reports = () => {
           {/* Summary KPI Strip */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             <Card className="border-l-4 border-l-emerald-500">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Total Income
               </span>
-              <h4 className="text-2xl font-bold text-slate-900 mt-2">
+              <h4 className="text-2xl font-bold text-slate-900 dark:text-white mt-2">
                 {formatCurrency(overview?.totalIncome, currency)}
               </h4>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
                 {overview?.incomeStats?.count || 0} income entries
               </p>
             </Card>
 
             <Card className="border-l-4 border-l-rose-500">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Total Expenses
               </span>
-              <h4 className="text-2xl font-bold text-slate-900 mt-2">
+              <h4 className="text-2xl font-bold text-slate-900 dark:text-white mt-2">
                 {formatCurrency(overview?.totalExpenses, currency)}
               </h4>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
                 {overview?.expenseStats?.count || 0} expense entries
               </p>
             </Card>
 
             <Card className="border-l-4 border-l-blue-500">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Net Balance
               </span>
               <h4
                 className={`text-2xl font-bold mt-2 ${
-                  (overview?.netSavings || 0) < 0 ? 'text-rose-600' : 'text-slate-900'
+                  (overview?.netSavings || 0) < 0 ? 'text-rose-600 dark:text-rose-400' : 'text-slate-900 dark:text-white'
                 }`}
               >
                 {formatCurrency(overview?.netSavings, currency)}
               </h4>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
                 {(overview?.netSavings || 0) < 0 ? 'Deficit for period' : 'Net surplus for period'}
               </p>
             </Card>
 
             <Card className="border-l-4 border-l-teal-500">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Savings Rate
               </span>
-              <h4 className="text-2xl font-bold text-teal-600 mt-2">
+              <h4 className="text-2xl font-bold text-teal-600 dark:text-teal-400 mt-2">
                 {formatPercentage(overview?.savingsRate)}
               </h4>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
                 Avg expense: {formatCurrency(overview?.expenseStats?.average, currency)}
               </p>
             </Card>
@@ -186,10 +186,10 @@ const Reports = () => {
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(parseInt(e.target.value, 10))}
-                className="rounded-xl border border-slate-300 bg-white py-1.5 px-3 text-xs font-semibold text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 py-1.5 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               >
                 {[2024, 2025, 2026, 2027].map((y) => (
-                  <option key={y} value={y}>
+                  <option key={y} value={y} className="dark:bg-slate-900 dark:text-slate-100">
                     {y}
                   </option>
                 ))}
@@ -210,7 +210,7 @@ const Reports = () => {
                 <CategoryPieChart data={categoryBreakdown} currency={currency} />
 
                 {/* Breakdown List */}
-                <div className="divide-y divide-slate-100 max-h-60 overflow-y-auto pr-2">
+                <div className="divide-y divide-slate-100 dark:divide-slate-800 max-h-60 overflow-y-auto pr-2">
                   {categoryBreakdown.map((cat) => (
                     <div key={cat.categoryId} className="flex items-center justify-between py-2 text-xs">
                       <div className="flex items-center gap-2">
@@ -218,13 +218,13 @@ const Reports = () => {
                           className="w-3 h-3 rounded-full inline-block"
                           style={{ backgroundColor: cat.color }}
                         />
-                        <span className="font-medium text-slate-800">{cat.name}</span>
+                        <span className="font-medium text-slate-800 dark:text-slate-200">{cat.name}</span>
                       </div>
                       <div className="flex items-center gap-4">
-                        <span className="font-semibold text-slate-900">
+                        <span className="font-semibold text-slate-900 dark:text-white">
                           {formatCurrency(cat.amount, currency)}
                         </span>
-                        <span className="text-slate-400 w-12 text-right">
+                        <span className="text-slate-400 dark:text-slate-500 w-12 text-right">
                           {formatPercentage(cat.percentage)}
                         </span>
                       </div>
@@ -241,7 +241,7 @@ const Reports = () => {
             >
               <div className="space-y-4">
                 {incomeSources.length === 0 ? (
-                  <div className="h-64 flex items-center justify-center text-xs text-slate-400">
+                  <div className="h-64 flex items-center justify-center text-xs text-slate-400 dark:text-slate-500">
                     No income sources recorded for this timeframe
                   </div>
                 ) : (
@@ -249,18 +249,18 @@ const Reports = () => {
                     {incomeSources.map((src) => (
                       <div key={src.source} className="space-y-1.5">
                         <div className="flex items-center justify-between text-xs">
-                          <span className="font-semibold text-slate-800">{src.source}</span>
-                          <span className="font-bold text-emerald-600">
+                          <span className="font-semibold text-slate-800 dark:text-slate-200">{src.source}</span>
+                          <span className="font-bold text-emerald-600 dark:text-emerald-400">
                             {formatCurrency(src.amount, currency)}
                           </span>
                         </div>
-                        <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+                        <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
                           <div
                             className="bg-emerald-500 h-2 rounded-full"
                             style={{ width: `${src.percentage}%` }}
                           />
                         </div>
-                        <div className="flex justify-between text-[11px] text-slate-400">
+                        <div className="flex justify-between text-[11px] text-slate-400 dark:text-slate-500">
                           <span>{src.count} deposit(s)</span>
                           <span>{formatPercentage(src.percentage)} of total</span>
                         </div>
@@ -281,17 +281,17 @@ const Reports = () => {
               {paymentMethods.map((m) => (
                 <div
                   key={m.paymentMethod}
-                  className="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between"
+                  className="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 flex flex-col justify-between transition-colors"
                 >
-                  <div className="flex items-center justify-between text-slate-500 mb-3">
+                  <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-3">
                     <span className="text-xs font-semibold uppercase">{m.paymentMethod}</span>
-                    <CreditCard className="w-4 h-4 text-slate-400" />
+                    <CreditCard className="w-4 h-4 text-slate-400 dark:text-slate-500" />
                   </div>
                   <div>
-                    <h5 className="text-lg font-bold text-slate-900">
+                    <h5 className="text-lg font-bold text-slate-900 dark:text-white">
                       {formatCurrency(m.amount, currency)}
                     </h5>
-                    <div className="flex justify-between text-[11px] text-slate-500 mt-1">
+                    <div className="flex justify-between text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                       <span>{m.count} charges</span>
                       <span className="font-semibold">{formatPercentage(m.percentage)}</span>
                     </div>

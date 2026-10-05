@@ -138,8 +138,8 @@ const Categories = () => {
       {/* Header & Add Button */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Category Settings</h2>
-          <p className="text-sm text-slate-500 mt-1">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Category Settings</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Organize transactions with system presets and custom color-coded categories.
           </p>
         </div>
@@ -149,13 +149,13 @@ const Categories = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800">
         <button
           onClick={() => setActiveTab('expense')}
           className={`pb-3 px-4 text-sm font-semibold border-b-2 transition-colors ${
             activeTab === 'expense'
-              ? 'border-emerald-600 text-emerald-600'
-              : 'border-transparent text-slate-500 hover:text-slate-800'
+              ? 'border-emerald-600 text-emerald-600 dark:text-emerald-400'
+              : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
           }`}
         >
           Expense Categories ({categories.filter((c) => c.type === 'expense').length})
@@ -164,8 +164,8 @@ const Categories = () => {
           onClick={() => setActiveTab('income')}
           className={`pb-3 px-4 text-sm font-semibold border-b-2 transition-colors ${
             activeTab === 'income'
-              ? 'border-emerald-600 text-emerald-600'
-              : 'border-transparent text-slate-500 hover:text-slate-800'
+              ? 'border-emerald-600 text-emerald-600 dark:text-emerald-400'
+              : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
           }`}
         >
           Income Categories ({categories.filter((c) => c.type === 'income').length})
@@ -190,8 +190,8 @@ const Categories = () => {
                       style={{ backgroundColor: cat.color }}
                     />
                     <div>
-                      <h4 className="text-sm font-semibold text-slate-900">{cat.name}</h4>
-                      <span className="text-[10px] uppercase font-semibold text-slate-400">
+                      <h4 className="text-sm font-semibold text-slate-900 dark:text-white">{cat.name}</h4>
+                      <span className="text-[10px] uppercase font-semibold text-slate-400 dark:text-slate-500">
                         {isSystem ? 'System Default' : 'Custom Category'}
                       </span>
                     </div>
@@ -199,14 +199,14 @@ const Categories = () => {
 
                   <div className="flex items-center gap-1">
                     {isSystem ? (
-                      <span title="System default (locked)" className="p-1 text-slate-300">
+                      <span title="System default (locked)" className="p-1 text-slate-300 dark:text-slate-600">
                         <Lock className="w-3.5 h-3.5" />
                       </span>
                     ) : (
                       <>
                         <button
                           onClick={() => handleOpenEdit(cat)}
-                          className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                          className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                           title="Edit"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
@@ -216,7 +216,7 @@ const Categories = () => {
                             setCategoryToDelete(cat);
                             setIsDeleteDialogOpen(true);
                           }}
-                          className="p-1 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                          className="p-1 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
                           title="Delete"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -247,7 +247,7 @@ const Categories = () => {
           />
 
           <div className="space-y-1.5">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300">
               Color Accent
             </label>
             <div className="flex items-center gap-2 flex-wrap pt-1">
@@ -265,7 +265,7 @@ const Categories = () => {
             </div>
           </div>
 
-          <div className="pt-4 flex justify-end gap-2.5 border-t border-slate-100">
+          <div className="pt-4 flex justify-end gap-2.5 border-t border-slate-100 dark:border-slate-800">
             <Button
               variant="outline"
               size="md"

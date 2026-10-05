@@ -194,8 +194,8 @@ const Expenses = () => {
       {/* Header & Add Button */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Expense Records</h2>
-          <p className="text-sm text-slate-500 mt-1">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Expense Records</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Log and categorize every dollar spent to monitor your financial outflow.
           </p>
         </div>
@@ -283,7 +283,7 @@ const Expenses = () => {
           <div>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs sm:text-sm">
-                <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-100 uppercase tracking-wider text-[11px]">
+                <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 font-semibold border-b border-slate-100 dark:border-slate-800 uppercase tracking-wider text-[11px]">
                   <tr>
                     <th className="px-6 py-3.5">Date</th>
                     <th className="px-6 py-3.5">Category</th>
@@ -294,10 +294,10 @@ const Expenses = () => {
                     <th className="px-6 py-3.5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {expenses.map((item) => (
-                    <tr key={item._id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="px-6 py-4 text-slate-600 whitespace-nowrap">
+                    <tr key={item._id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                      <td className="px-6 py-4 text-slate-600 dark:text-slate-400 whitespace-nowrap">
                         {formatDate(item.date)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -305,33 +305,33 @@ const Expenses = () => {
                           {item.categoryId?.name || 'General'}
                         </Badge>
                       </td>
-                      <td className="px-6 py-4 font-medium text-slate-800 max-w-xs truncate">
+                      <td className="px-6 py-4 font-medium text-slate-800 dark:text-slate-200 max-w-xs truncate">
                         {item.description || '—'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="inline-flex items-center gap-1.5 text-xs text-slate-600">
-                          <CreditCard className="w-3.5 h-3.5 text-slate-400" />
+                        <span className="inline-flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400">
+                          <CreditCard className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                           {item.paymentMethod || 'Card'}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {item.isRecurring ? (
-                          <span className="inline-flex items-center gap-1 text-xs text-blue-600 font-medium">
+                          <span className="inline-flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 font-medium">
                             <RefreshCw className="w-3 h-3" />
                             {item.recurringFrequency}
                           </span>
                         ) : (
-                          <span className="text-slate-400 text-xs">One-time</span>
+                          <span className="text-slate-400 dark:text-slate-500 text-xs">One-time</span>
                         )}
                       </td>
-                      <td className="px-6 py-4 text-right font-bold text-rose-600 whitespace-nowrap">
+                      <td className="px-6 py-4 text-right font-bold text-rose-600 dark:text-rose-400 whitespace-nowrap">
                         -{formatCurrency(item.amount, currency)}
                       </td>
                       <td className="px-6 py-4 text-right whitespace-nowrap">
                         <div className="flex items-center justify-end gap-1">
                           <button
                             onClick={() => handleOpenEdit(item)}
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                             title="Edit Expense"
                           >
                             <Edit2 className="w-4 h-4" />
@@ -341,7 +341,7 @@ const Expenses = () => {
                               setExpenseToDelete(item);
                               setIsDeleteDialogOpen(true);
                             }}
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
                             title="Delete Expense"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -416,7 +416,7 @@ const Expenses = () => {
           />
 
           {/* Recurring Option */}
-          <div className="pt-2 border-t border-slate-100 space-y-3">
+          <div className="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-3">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
@@ -428,9 +428,9 @@ const Expenses = () => {
                     recurringFrequency: e.target.checked ? 'monthly' : 'none',
                   })
                 }
-                className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 border-slate-300"
+                className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 border-slate-300 dark:border-slate-700 dark:bg-slate-900"
               />
-              <span className="text-xs font-semibold text-slate-700">
+              <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 This is a recurring bill / subscription
               </span>
             </label>
@@ -445,7 +445,7 @@ const Expenses = () => {
             )}
           </div>
 
-          <div className="pt-4 flex justify-end gap-2.5 border-t border-slate-100">
+          <div className="pt-4 flex justify-end gap-2.5 border-t border-slate-100 dark:border-slate-800">
             <Button
               variant="outline"
               size="md"

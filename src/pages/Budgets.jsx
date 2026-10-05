@@ -173,8 +173,8 @@ const Budgets = () => {
       {/* Page Header with Month/Year Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Budget Planner</h2>
-          <p className="text-sm text-slate-500 mt-1">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Budget Planner</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Set and track spending boundaries to avoid overspending in key categories.
           </p>
         </div>
@@ -184,10 +184,10 @@ const Budgets = () => {
           <select
             value={selectedMonth}
             onChange={(e) => setSelectedMonth(parseInt(e.target.value, 10))}
-            className="rounded-xl border border-slate-300 bg-white py-2 px-3 text-xs font-semibold text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 py-2 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             {MONTH_NAMES.map((name, i) => (
-              <option key={name} value={i + 1}>
+              <option key={name} value={i + 1} className="dark:bg-slate-900 dark:text-slate-100">
                 {name}
               </option>
             ))}
@@ -197,10 +197,10 @@ const Budgets = () => {
           <select
             value={selectedYear}
             onChange={(e) => setSelectedYear(parseInt(e.target.value, 10))}
-            className="rounded-xl border border-slate-300 bg-white py-2 px-3 text-xs font-semibold text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 py-2 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             {[2024, 2025, 2026, 2027, 2028].map((y) => (
-              <option key={y} value={y}>
+              <option key={y} value={y} className="dark:bg-slate-900 dark:text-slate-100">
                 {y}
               </option>
             ))}
@@ -315,7 +315,7 @@ const Budgets = () => {
                       <Badge color={item.category?.color} size="md">
                         {item.category?.name || 'Category'}
                       </Badge>
-                      <h4 className="text-lg font-bold text-slate-900 mt-2">
+                      <h4 className="text-lg font-bold text-slate-900 dark:text-white mt-2">
                         {formatCurrency(item.amount, currency)}
                       </h4>
                     </div>
@@ -323,7 +323,7 @@ const Budgets = () => {
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => handleOpenEdit(item)}
-                        className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+                        className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
                         title="Edit Limit"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
@@ -333,7 +333,7 @@ const Budgets = () => {
                           setBudgetToDelete(item);
                           setIsDeleteDialogOpen(true);
                         }}
-                        className="p-1 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50"
+                        className="p-1 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40"
                         title="Delete Budget"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -344,15 +344,15 @@ const Budgets = () => {
                   {/* Progress Bar */}
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-500">
-                        Spent: <span className="font-semibold text-slate-800">{formatCurrency(item.spentAmount, currency)}</span>
+                      <span className="text-slate-500 dark:text-slate-400">
+                        Spent: <span className="font-semibold text-slate-800 dark:text-slate-200">{formatCurrency(item.spentAmount, currency)}</span>
                       </span>
-                      <span className="font-bold text-slate-700">
+                      <span className="font-bold text-slate-700 dark:text-slate-300">
                         {formatPercentage(item.usagePercentage)}
                       </span>
                     </div>
 
-                    <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                    <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden">
                       <div
                         className={`h-2.5 rounded-full transition-all duration-500 ${
                           item.isOverBudget
@@ -367,19 +367,19 @@ const Budgets = () => {
                   </div>
 
                   {/* Status Indicator Footer */}
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
                     {item.isOverBudget ? (
-                      <span className="inline-flex items-center gap-1 text-rose-600 font-semibold">
+                      <span className="inline-flex items-center gap-1 text-rose-600 dark:text-rose-400 font-semibold">
                         <AlertTriangle className="w-3.5 h-3.5" />
                         Over by {formatCurrency(item.spentAmount - item.amount, currency)}
                       </span>
                     ) : item.isNearLimit ? (
-                      <span className="inline-flex items-center gap-1 text-amber-600 font-semibold">
+                      <span className="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 font-semibold">
                         <AlertTriangle className="w-3.5 h-3.5" />
                         Approaching limit ({formatCurrency(item.remainingAmount, currency)} left)
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 text-emerald-600 font-semibold">
+                      <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         {formatCurrency(item.remainingAmount, currency)} remaining
                       </span>

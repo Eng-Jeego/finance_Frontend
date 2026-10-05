@@ -13,9 +13,9 @@ export function Modal({ open, title, children, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
-        className="relative z-10 w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl"
+        className="relative z-10 w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 border border-transparent dark:border-slate-800 p-6 shadow-xl transition-colors"
       >
-        <h2 id="modal-title" className="text-lg font-semibold text-slate-900">
+        <h2 id="modal-title" className="text-lg font-semibold text-slate-900 dark:text-white">
           {title}
         </h2>
         <div className="mt-4">{children}</div>

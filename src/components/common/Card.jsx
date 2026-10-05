@@ -11,18 +11,18 @@ const Card = ({
   headerClassName = 'p-6 pb-0',
 }) => {
   return (
-    <div className={`bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden ${className}`}>
+    <div className={`bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden transition-colors duration-200 ${className}`}>
       {(title || subtitle || action || Icon) && (
         <div className={`flex items-center justify-between gap-4 ${headerClassName}`}>
           <div className="flex items-center gap-3">
             {Icon && (
-              <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600 shrink-0">
+              <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 shrink-0">
                 <Icon className="w-5 h-5" />
               </div>
             )}
             <div>
-              {title && <h3 className="text-base font-semibold text-slate-900">{title}</h3>}
-              {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
+              {title && <h3 className="text-base font-semibold text-slate-900 dark:text-white">{title}</h3>}
+              {subtitle && <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{subtitle}</p>}
             </div>
           </div>
           {action && <div className="shrink-0">{action}</div>}

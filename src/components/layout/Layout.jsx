@@ -7,7 +7,7 @@ const Layout = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex transition-colors duration-200">
       {/* Sidebar Navigation */}
       <Sidebar
         isMobileOpen={isMobileOpen}

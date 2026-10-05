@@ -6,6 +6,7 @@ import { useToast } from '../context/ToastContext';
 import Input from '../components/common/Input';
 import Select from '../components/common/Select';
 import Button from '../components/common/Button';
+import ThemeToggle from '../components/common/ThemeToggle';
 import { CURRENCIES } from '../utils/constants';
 
 const Register = () => {
@@ -85,23 +86,28 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative transition-colors duration-200">
+      {/* Top right Theme Toggle */}
+      <div className="absolute top-4 right-4">
+        <ThemeToggle size="md" />
+      </div>
+
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/25 mb-4">
           <Wallet className="w-6 h-6 stroke-[2.2]" />
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
           Create your account
         </h2>
-        <p className="mt-2 text-sm text-slate-500">
+        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
           Start tracking expenses, managing budgets, and growing your savings
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4">
-        <div className="bg-white py-8 px-6 sm:px-10 shadow-xl shadow-slate-200/50 rounded-2xl border border-slate-200/80">
+        <div className="bg-white dark:bg-slate-900 py-8 px-6 sm:px-10 shadow-xl shadow-slate-200/50 dark:shadow-none rounded-2xl border border-slate-200/80 dark:border-slate-800 transition-colors">
           {serverError && (
-            <div className="mb-5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs font-medium flex items-center gap-2">
+            <div className="mb-5 p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-900 dark:text-rose-200 text-xs font-medium flex items-center gap-2">
               <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
               <span>{serverError}</span>
             </div>
@@ -176,11 +182,11 @@ const Register = () => {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Already have an account?{' '}
               <Link
                 to="/login"
-                className="font-semibold text-emerald-600 hover:text-emerald-700 underline underline-offset-2"
+                className="font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-2"
               >
                 Sign in
               </Link>

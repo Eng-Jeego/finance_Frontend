@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { User, Lock, Wallet, ShieldCheck, LogOut } from 'lucide-react';
+import { User, Lock, Wallet, ShieldCheck, LogOut, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
+import { useTheme } from '../context/ThemeContext';
 import authService from '../services/authService';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
@@ -13,6 +14,7 @@ import { formatDate } from '../utils/formatters';
 const Profile = () => {
   const { user, updateUser, logout } = useAuth();
   const { showToast } = useToast();
+  const { theme, setTheme } = useTheme();
 
   // Profile Form state
   const [profileData, setProfileData] = useState({
@@ -87,9 +89,9 @@ const Profile = () => {
     <div className="max-w-4xl space-y-8">
       {/* Page Header */}
       <div>
-        <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Account Settings & Profile</h2>
-        <p className="text-sm text-slate-500 mt-1">
-          Manage your personal details, preferred currency, and security credentials.
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Account Settings & Profile</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          Manage your personal details, preferred currency, appearance, and security credentials.
         </p>
       </div>
 
@@ -101,12 +103,12 @@ const Profile = () => {
               {user?.fullName ? user.fullName[0] : 'U'}
             </div>
             <div>
-              <h3 className="text-lg font-bold text-slate-900">{user?.fullName}</h3>
-              <p className="text-sm text-slate-500">{user?.email}</p>
-              <div className="flex items-center gap-3 mt-2 text-xs text-slate-400">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">{user?.fullName}</h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{user?.email}</p>
+              <div className="flex items-center gap-3 mt-2 text-xs text-slate-400 dark:text-slate-500">
                 <span>Joined {formatDate(user?.createdAt)}</span>
                 <span>•</span>
-                <span className="text-emerald-600 font-semibold">Active Account</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Active Account</span>
               </div>
             </div>
           </div>
@@ -200,6 +202,54 @@ const Profile = () => {
           </form>
         </Card>
       </div>
+
+      {/* Appearance / Theme Preferences Card */}
+      <Card
+        title="System Appearance & Theme"
+        subtitle="Choose how PersonalFinance looks to you during the day and night"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <button
+            type="button"
+            onClick={() => setTheme('light')}
+            className={`p-4 rounded-xl border-2 text-left flex items-start gap-3 transition-all ${
+              theme === 'light'
+                ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20 text-slate-900 dark:text-white ring-2 ring-emerald-500/20'
+                : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+            }`}
+          >
+            <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600 shrink-0">
+              <Sun className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-semibold text-sm">Light Mode (Maalin)</div>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Bright appearance suitable for daytime use and high-visibility environments.
+              </p>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setTheme('dark')}
+            className={`p-4 rounded-xl border-2 text-left flex items-start gap-3 transition-all ${
+              theme === 'dark'
+                ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20 text-slate-900 dark:text-white ring-2 ring-emerald-500/20'
+                : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+            }`}
+          >
+            <div className="p-2.5 rounded-xl bg-slate-800 text-amber-400 shrink-0">
+              <Moon className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-semibold text-sm">Dark Mode (Habeen)</div>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Easy on the eyes, reduces glare, and perfect for nighttime or low-light usage.
+              </p>
+            </div>
+          </button>
+        </div>
+      </Card>
     </div>
   );
 };

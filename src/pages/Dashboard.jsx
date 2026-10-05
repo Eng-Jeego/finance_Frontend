@@ -74,10 +74,10 @@ const Dashboard = () => {
       {/* Top Welcome & Quick Actions Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Welcome back, {user?.fullName?.split(' ')[0] || 'User'} 👋
           </h2>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Here's what's happening with your personal finances this month.
           </p>
         </div>
@@ -100,37 +100,37 @@ const Dashboard = () => {
         {/* Net Balance Card */}
         <Card className="border-l-4 border-l-emerald-500">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Total Balance
             </span>
-            <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600">
+            <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
               <Wallet className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-3">
-            <h4 className="text-2xl font-bold text-slate-900">
+            <h4 className="text-2xl font-bold text-slate-900 dark:text-white">
               {formatCurrency(lifetime.currentBalance, currency)}
             </h4>
-            <p className="text-xs text-slate-400 mt-1">Available net financial standing</p>
+            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">Available net financial standing</p>
           </div>
         </Card>
 
         {/* Total Income Card */}
         <Card className="border-l-4 border-l-blue-500">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Total Income
             </span>
-            <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
+            <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
               <TrendingUp className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-3">
-            <h4 className="text-2xl font-bold text-slate-900">
+            <h4 className="text-2xl font-bold text-slate-900 dark:text-white">
               {formatCurrency(lifetime.totalIncome, currency)}
             </h4>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-slate-500">
-              <span className="font-semibold text-emerald-600">
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-slate-500 dark:text-slate-400">
+              <span className="font-semibold text-emerald-600 dark:text-emerald-400">
                 {formatCurrency(currentMonth.income, currency)}
               </span>
               <span>this month</span>
@@ -141,19 +141,19 @@ const Dashboard = () => {
         {/* Total Expenses Card */}
         <Card className="border-l-4 border-l-rose-500">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Total Expenses
             </span>
-            <div className="p-2 rounded-xl bg-rose-50 text-rose-600">
+            <div className="p-2 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400">
               <TrendingDown className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-3">
-            <h4 className="text-2xl font-bold text-slate-900">
+            <h4 className="text-2xl font-bold text-slate-900 dark:text-white">
               {formatCurrency(lifetime.totalExpenses, currency)}
             </h4>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-slate-500">
-              <span className="font-semibold text-rose-600">
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-slate-500 dark:text-slate-400">
+              <span className="font-semibold text-rose-600 dark:text-rose-400">
                 {formatCurrency(currentMonth.expenses, currency)}
               </span>
               <span>this month</span>
@@ -164,20 +164,20 @@ const Dashboard = () => {
         {/* Net Savings Card */}
         <Card className="border-l-4 border-l-teal-500">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Net Savings
             </span>
-            <div className="p-2 rounded-xl bg-teal-50 text-teal-600">
+            <div className="p-2 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400">
               <PiggyBank className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-3">
-            <h4 className="text-2xl font-bold text-slate-900">
+            <h4 className="text-2xl font-bold text-slate-900 dark:text-white">
               {formatCurrency(lifetime.totalSavings, currency)}
             </h4>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-slate-500">
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-slate-500 dark:text-slate-400">
               <span>Savings Rate:</span>
-              <span className="font-semibold text-teal-600">
+              <span className="font-semibold text-teal-600 dark:text-teal-400">
                 {formatPercentage(lifetime.savingsRate)}
               </span>
             </div>
@@ -252,27 +252,27 @@ const Dashboard = () => {
                   return (
                     <div key={b._id} className="space-y-1.5">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="font-semibold text-slate-800">
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
                           {b.category?.name || 'Category'}
                         </span>
-                        <span className="text-slate-500">
+                        <span className="text-slate-500 dark:text-slate-400">
                           {formatCurrency(b.spentAmount, currency)} / {formatCurrency(b.amount, currency)}
                         </span>
                       </div>
                       {/* Progress Bar Track */}
-                      <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+                      <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
                         <div
                           className={`h-2 rounded-full transition-all duration-500 ${progressColor}`}
                           style={{ width: `${Math.min(b.usagePercentage, 100)}%` }}
                         />
                       </div>
                       <div className="flex items-center justify-between text-[11px]">
-                        <span className={b.isOverBudget ? 'text-rose-600 font-semibold' : 'text-slate-400'}>
+                        <span className={b.isOverBudget ? 'text-rose-600 dark:text-rose-400 font-semibold' : 'text-slate-400 dark:text-slate-500'}>
                           {b.isOverBudget
                             ? `Over budget by ${formatCurrency(b.spentAmount - b.amount, currency)}`
                             : `${formatCurrency(b.remainingAmount, currency)} left`}
                         </span>
-                        <span className="font-medium text-slate-600">
+                        <span className="font-medium text-slate-600 dark:text-slate-300">
                           {formatPercentage(b.usagePercentage)}
                         </span>
                       </div>
@@ -291,11 +291,11 @@ const Dashboard = () => {
             subtitle="Latest income and expense records"
             action={
               <div className="flex items-center gap-2">
-                <Link to="/income" className="text-xs font-semibold text-emerald-600 hover:text-emerald-700">
+                <Link to="/income" className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700">
                   Incomes
                 </Link>
-                <span className="text-slate-300">•</span>
-                <Link to="/expenses" className="text-xs font-semibold text-rose-600 hover:text-rose-700">
+                <span className="text-slate-300 dark:text-slate-600">•</span>
+                <Link to="/expenses" className="text-xs font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-700">
                   Expenses
                 </Link>
               </div>
@@ -310,7 +310,7 @@ const Dashboard = () => {
             ) : (
               <div className="overflow-x-auto -mx-6">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-50 text-slate-500 font-semibold border-y border-slate-100 uppercase tracking-wider">
+                  <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 font-semibold border-y border-slate-100 dark:border-slate-800 uppercase tracking-wider">
                     <tr>
                       <th className="px-6 py-3">Date</th>
                       <th className="px-6 py-3">Category / Source</th>
@@ -318,12 +318,12 @@ const Dashboard = () => {
                       <th className="px-6 py-3 text-right">Amount</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {recentTransactions.map((tx) => {
                       const isIncome = tx.type === 'income';
                       return (
-                        <tr key={tx._id} className="hover:bg-slate-50/80 transition-colors">
-                          <td className="px-6 py-3.5 text-slate-500 whitespace-nowrap">
+                        <tr key={tx._id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                          <td className="px-6 py-3.5 text-slate-500 dark:text-slate-400 whitespace-nowrap">
                             {formatDate(tx.date)}
                           </td>
                           <td className="px-6 py-3.5 whitespace-nowrap">
@@ -335,12 +335,12 @@ const Dashboard = () => {
                               {tx.category?.name || tx.source || 'General'}
                             </Badge>
                           </td>
-                          <td className="px-6 py-3.5 text-slate-700 max-w-xs truncate">
+                          <td className="px-6 py-3.5 text-slate-700 dark:text-slate-300 max-w-xs truncate">
                             {tx.description || (isIncome ? tx.source : 'Expense')}
                           </td>
                           <td
                             className={`px-6 py-3.5 text-right font-bold whitespace-nowrap ${
-                              isIncome ? 'text-emerald-600' : 'text-slate-900'
+                              isIncome ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-900 dark:text-slate-100'
                             }`}
                           >
                             {isIncome ? '+' : '-'}

@@ -20,18 +20,18 @@ const Input = forwardRef(
     return (
       <div className={`w-full ${containerClassName}`}>
         {label && (
-          <label htmlFor={name} className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1.5">
+          <label htmlFor={name} className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5">
             {label}
           </label>
         )}
         <div className="relative rounded-xl shadow-sm">
           {Icon && (
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-slate-400">
               <Icon className="h-4 w-4" />
             </div>
           )}
           {prefix && (
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500 text-sm font-medium">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500 dark:text-slate-300 text-sm font-medium">
               {prefix}
             </div>
           )}
@@ -40,23 +40,23 @@ const Input = forwardRef(
             id={name}
             name={name}
             type={type}
-            className={`block w-full rounded-xl border text-sm text-slate-900 placeholder-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0 disabled:bg-slate-50 disabled:text-slate-500 ${
+            className={`block w-full rounded-xl border text-sm text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-900 placeholder-slate-400 dark:placeholder-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0 disabled:bg-slate-50 dark:disabled:bg-slate-800/60 disabled:text-slate-500 dark:disabled:text-slate-400 ${
               Icon ? 'pl-10' : prefix ? 'pl-8' : 'pl-3.5'
             } ${suffix ? 'pr-10' : 'pr-3.5'} py-2.5 ${
               error
-                ? 'border-rose-300 focus:border-rose-500 focus:ring-rose-200'
-                : 'border-slate-300 focus:border-emerald-500 focus:ring-emerald-100'
+                ? 'border-rose-300 dark:border-rose-500/60 focus:border-rose-500 focus:ring-rose-200 dark:focus:ring-rose-950/50'
+                : 'border-slate-300 dark:border-slate-700 focus:border-emerald-500 focus:ring-emerald-100 dark:focus:ring-emerald-950/50'
             } ${className}`}
             {...props}
           />
           {suffix && (
-            <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400 text-sm font-medium">
+            <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400 dark:text-slate-500 text-sm font-medium">
               {suffix}
             </div>
           )}
         </div>
-        {error && <p className="mt-1 text-xs text-rose-600 font-medium">{error}</p>}
-        {helperText && !error && <p className="mt-1 text-xs text-slate-500">{helperText}</p>}
+        {error && <p className="mt-1 text-xs text-rose-600 dark:text-rose-400 font-medium">{error}</p>}
+        {helperText && !error && <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{helperText}</p>}
       </div>
     );
   }
