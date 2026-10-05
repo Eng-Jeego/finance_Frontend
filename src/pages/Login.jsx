@@ -30,9 +30,14 @@ const Login = () => {
 
     setLoading(true);
     try {
-      await login({ email, password });
+      const res = await login({ email, password });
       showToast('Welcome back! Successfully logged in.', 'success');
-      navigate('/dashboard');
+      const userRole = res?.data?.user?.role?.toUpperCase();
+      if (userRole === 'ADMIN') {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
       setError(err.message || 'Invalid email or password');
     } finally {
@@ -43,6 +48,12 @@ const Login = () => {
   const handleFillDemo = () => {
     setEmail('alex@example.com');
     setPassword('password123');
+    setError('');
+  };
+
+  const handleFillAdminDemo = () => {
+    setEmail('admin@personalfinance.local');
+    setPassword('AdminPass123!');
     setError('');
   };
 
@@ -116,13 +127,21 @@ const Login = () => {
           </form>
 
           {/* Demo account quick fill */}
-          <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 text-center">
+          <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-center gap-2">
             <button
               type="button"
               onClick={handleFillDemo}
-              className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 p-2 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors"
+              className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 px-2.5 py-1.5 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors"
             >
-              ⚡ Quick Fill Demo Credentials (alex@example.com)
+              ⚡ User Demo (alex@example.com)
+            </button>
+            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
+            <button
+              type="button"
+              onClick={handleFillAdminDemo}
+              className="text-xs font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 px-2.5 py-1.5 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-950/40 transition-colors"
+            >
+              🛡️ Admin Demo (admin@personalfinance.local)
             </button>
           </div>
 
