@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Mail, Lock, Wallet, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
@@ -43,18 +43,6 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleFillDemo = () => {
-    setEmail('alex@example.com');
-    setPassword('password123');
-    setError('');
-  };
-
-  const handleFillAdminDemo = () => {
-    setEmail('admin@personalfinance.local');
-    setPassword('AdminPass123!');
-    setError('');
   };
 
   return (
@@ -125,37 +113,6 @@ const Login = () => {
               Sign In
             </Button>
           </form>
-
-          {/* Demo account quick fill */}
-          <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-center gap-2">
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 px-2.5 py-1.5 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors"
-            >
-              ⚡ User Demo (alex@example.com)
-            </button>
-            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
-            <button
-              type="button"
-              onClick={handleFillAdminDemo}
-              className="text-xs font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 px-2.5 py-1.5 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-950/40 transition-colors"
-            >
-              🛡️ Admin Demo (admin@personalfinance.local)
-            </button>
-          </div>
-
-          <div className="mt-4 text-center">
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Don't have an account?{' '}
-              <Link
-                to="/register"
-                className="font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-2"
-              >
-                Create an account
-              </Link>
-            </p>
-          </div>
         </div>
       </div>
     </div>

@@ -16,6 +16,13 @@ const adminService = {
   },
 
   /**
+   * Admin creates a new user account
+   */
+  async createUser(userData) {
+    return await api.post('/admin/users', userData);
+  },
+
+  /**
    * Get single user details and financial activity
    */
   async getUserById(id, params = {}) {

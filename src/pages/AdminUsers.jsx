@@ -10,6 +10,7 @@ import {
   Trash2,
   UserCheck,
   UserX,
+  UserPlus,
   Shield,
   ArrowUpDown,
   RefreshCw,
@@ -45,6 +46,17 @@ const AdminUsers = () => {
   const [sortOrder, setSortOrder] = useState('desc');
 
   // Modals state
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [createFormData, setCreateFormData] = useState({
+    fullName: '',
+    email: '',
+    password: '',
+    role: 'USER',
+    status: 'ACTIVE',
+    currency: 'USD',
+  });
+  const [createLoading, setCreateLoading] = useState(false);
+
   const [editingUser, setEditingUser] = useState(null);
   const [editFormData, setEditFormData] = useState({ fullName: '', email: '', role: 'USER', currency: 'USD' });
   const [editLoading, setEditLoading] = useState(false);
@@ -87,6 +99,43 @@ const AdminUsers = () => {
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
+
+  // Handle Create User
+  const handleCreateUser = async (e) => {
+    e.preventDefault();
+    if (!createFormData.fullName.trim()) {
+      showToast('Full name is required', 'error');
+      return;
+    }
+    if (!createFormData.email.trim()) {
+      showToast('Email address is required', 'error');
+      return;
+    }
+    if (!createFormData.password || createFormData.password.length < 6) {
+      showToast('Password must be at least 6 characters', 'error');
+      return;
+    }
+
+    setCreateLoading(true);
+    try {
+      await adminService.createUser(createFormData);
+      showToast('New user account created successfully', 'success');
+      setIsCreateOpen(false);
+      setCreateFormData({
+        fullName: '',
+        email: '',
+        password: '',
+        role: 'USER',
+        status: 'ACTIVE',
+        currency: 'USD',
+      });
+      fetchUsers();
+    } catch (err) {
+      showToast(err.message || 'Failed to create user', 'error');
+    } finally {
+      setCreateLoading(false);
+    }
+  };
 
   // Handle Edit User
   const openEditModal = (u) => {
@@ -197,10 +246,21 @@ const AdminUsers = () => {
             Search, filter, view financial summaries, manage permissions, and update user accounts.
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={fetchUsers} disabled={loading} className="gap-2">
-          <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-          Refresh
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => setIsCreateOpen(true)}
+            className="gap-2"
+          >
+            <UserPlus className="w-4 h-4" />
+            Add User
+          </Button>
+          <Button variant="outline" size="sm" onClick={fetchUsers} disabled={loading} className="gap-2">
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            Refresh
+          </Button>
+        </div>
       </div>
 
       {/* Search & Filter Toolbar */}
@@ -487,6 +547,106 @@ const AdminUsers = () => {
           onPageChange={(newPage) => setPagination((p) => ({ ...p, page: newPage }))}
         />
       </Card>
+
+      {/* Create User Modal */}
+      <Modal
+        isOpen={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        title="Create New User Account"
+        maxWidth="max-w-md"
+      >
+        <form onSubmit={handleCreateUser} className="space-y-4">
+          <Input
+            label="Full Name"
+            placeholder="e.g. John Doe"
+            value={createFormData.fullName}
+            onChange={(e) => setCreateFormData({ ...createFormData, fullName: e.target.value })}
+            required
+          />
+
+          <Input
+            label="Email Address"
+            type="email"
+            placeholder="e.g. john@example.com"
+            value={createFormData.email}
+            onChange={(e) => setCreateFormData({ ...createFormData, email: e.target.value })}
+            required
+          />
+
+          <Input
+            label="Initial Password"
+            type="password"
+            placeholder="At least 6 characters"
+            value={createFormData.password}
+            onChange={(e) => setCreateFormData({ ...createFormData, password: e.target.value })}
+            required
+            minLength={6}
+          />
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                Assigned Role
+              </label>
+              <select
+                value={createFormData.role}
+                onChange={(e) => setCreateFormData({ ...createFormData, role: e.target.value })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              >
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                Account Status
+              </label>
+              <select
+                value={createFormData.status}
+                onChange={(e) => setCreateFormData({ ...createFormData, status: e.target.value })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              >
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="INACTIVE">INACTIVE</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+              Preferred Currency
+            </label>
+            <select
+              value={createFormData.currency}
+              onChange={(e) => setCreateFormData({ ...createFormData, currency: e.target.value })}
+              className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+              <option value="CAD">CAD ($)</option>
+              <option value="AUD">AUD ($)</option>
+              <option value="INR">INR (₹)</option>
+            </select>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-3">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setIsCreateOpen(false)}
+              disabled={createLoading}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" variant="primary" size="sm" loading={createLoading}>
+              Create User
+            </Button>
+          </div>
+        </form>
+      </Modal>
 
       {/* Edit User Modal */}
       <Modal
